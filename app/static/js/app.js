@@ -45,36 +45,33 @@ const Home = Vue.component('home', {
 
 const Upload=Vue.component('upload-form',{
     template:`
-    <form @submit.prevent="uploadPhoto" id="uploadForm"  method="post" enctype="multipart/form-data" >
-     <h1>Upload Form</h1>
-      <ul>
-          <div v-for="(mgs,con, index) in msg">
-                
-                <span v-if="con === 'errors'">
-                    <li v-for="mgs in msg.errors">
-                     {{mgs}}
+    <div>
+        <form @submit.prevent="uploadPhoto" id="uploadForm"  method="post" enctype="multipart/form-data" >
+         <h1>Upload Form</h1>
+            <ul v-for="(mgs,con, index) in msg">
+                <div v-if="con === 'errors'" >
+                    <li v-for="mgs in msg.errors" class="errors">
+                      {{mgs}}
                     </li>
-                </span>
-                <span v-else>
-                   <p>
-                      <li v-if="index==0">
+                </div>
+                <div v-else class="success">
+                      <p v-if="index==0">
                        {{msg.message}}
-                      </li>
-                   </p>
-                </span>
-          </div>
-      </ul>
-       <div>
-        Description<br>
-        <input type="text" name="description"></input>
-        </div>
-        <div>
-        Photo Upload<br>
-        <input type="file" name="photo"></input><br>
-        </div>
-        <button type="submit" name="submit">Submit</button>
-       </div>
-    </form>
+                      </p>
+                </div>
+           </ul>
+           
+           <div>
+            Description<br>
+            <input type="text" name="description" size="155"></input>
+            </div>
+            <div>
+            Photo Upload<br>
+            <input type="file" name="photo"></input><br>
+            </div>
+            <button type="submit" name="submit">Submit</button>
+       </form>
+    </div>
     `,
     methods:{
         uploadPhoto: function(){

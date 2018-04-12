@@ -1,3 +1,9 @@
 body {
     padding-top: 5rem;
 }
+.success{
+    background-color: green;
+}
+.errors{
+    background-color: red;
+}
