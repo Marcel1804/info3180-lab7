@@ -47,7 +47,23 @@ const Upload=Vue.component('upload-form',{
     template:`
     <form @submit.prevent="uploadPhoto" id="uploadForm"  method="post" enctype="multipart/form-data" >
      <h1>Upload Form</h1>
-      <h6 id="msg"></h6>
+      <ul>
+          <div v-for="(mgs,con, index) in msg">
+                
+                <span v-if="con === 'errors'">
+                    <li v-for="mgs in msg.errors">
+                     {{mgs}}
+                    </li>
+                </span>
+                <span v-else>
+                   <p>
+                      <li v-if="index==0">
+                       {{msg.message}}
+                      </li>
+                   </p>
+                </span>
+          </div>
+      </ul>
        <div>
         Description<br>
         <input type="text" name="description"></input>
@@ -62,8 +78,10 @@ const Upload=Vue.component('upload-form',{
     `,
     methods:{
         uploadPhoto: function(){
+            let self =this;
             let uploadForm= document.getElementById('uploadForm');
             let form_data = new FormData(uploadForm);
+    
             fetch("/api/upload",{
                 method:'POST',
                 body: form_data,
@@ -78,12 +96,18 @@ const Upload=Vue.component('upload-form',{
               .then(function(jsonResponse){
                   //display a success message
                   console.log(jsonResponse);
+                  self.msg=jsonResponse;
               })
               .catch(function(error){
                   console.log(error);
               });
         }
-    }
+    },
+    data: function(){
+            return{
+                msg:[]
+            }
+        }
 });
 
 // Define Routes

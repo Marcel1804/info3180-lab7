@@ -30,7 +30,7 @@ def upload():
         photo=photo.filename
         return jsonify({"message":"File Upload Successful","file":photo,"description":description})
     else:
-        return jsonify({"errors":[ form_errors(form)]})
+        return jsonify({"errors":form_errors(form)})
 
 # Here we define a function to collect form errors from Flask-WTF
 # which we can later use
