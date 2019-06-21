@@ -60,7 +60,6 @@ const Upload=Vue.component('upload-form',{
                       </p>
                 </div>
            </ul>
-           
            <div>
             Description<br>
             <input type="text" name="description" size="155"></input>
